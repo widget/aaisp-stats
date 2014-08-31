@@ -46,7 +46,9 @@ def parseBillingBasicRow(row):
 	link = cells[8].a.get('href')
 	return BillingBasic(start, end, bf, used, allow, topup, link)
 
+
 CLUELESS="https://clueless.aa.net.uk/"
+
 
 def fetchData(creds):
 	session = requests.Session()
@@ -80,9 +82,10 @@ def fetchData(creds):
 if __name__ == "__main__":
 	
 	parser = argparse.ArgumentParser(description="Fetch/parse AAISP usage data")
-	parser.add_argument("creds", nargs='?')
+	parser.add_argument("--creds")
 	parser.add_argument("-f", "--fetch", default=False, action="store_const", const=True)
 	parser.add_argument("-g", "--graph", default=False, action="store_const", const=True)
+	parser.add_argument("-o", "--output", default="./output.html")
 	
 	args = parser.parse_args()
 	
@@ -99,7 +102,7 @@ if __name__ == "__main__":
 	if args.graph:
 		u = json.load(open("usages.json"))
 		b = json.load(open("billing.json"))
-		
+
 		usages = [MonthlyUsage(*obj) for obj in u]
 		billing = [BillingBasic(*obj) for obj in b]
 	
@@ -204,5 +207,6 @@ if __name__ == "__main__":
 						time_chart=time_cht.render(disable_xml_declaration=True), 
 						usage_chart=usage_pie.render(disable_xml_declaration=True))
 		
-		with open("output.html", "w") as html:
+		with open(args.output, "w") as html:
 			html.write(doc)
+
