@@ -23,9 +23,25 @@ Know your username and password for the AAISP billing website (clueless).  Write
 
         ["username", "password"]
 
-Protect this file with a suitable umask as it has your credentials in plaintext.  Run the `scrape_usage.py` program and pass this file in with the --creds argument.  Use --fetch to grab available stats and store them in the local directory in JSON format.  Use --graph to create an output HTML file, and use --output to direct where this file is put.  Both --fetch and --graph can be used in a single invocation.
+Protect this file with a suitable umask as it has your credentials in plaintext.  Run the `scrape_usage.py` program and pass this file in with the --creds argument.  Use --fetch to grab available stats and store them in the local directory.  Use --graph to create an output HTML file, and use --output to direct where this file is put.  Both --fetch and --graph can be used in a single invocation.
 
 I then place the HTML on an internal webserver to look at.
+
+Command line output:
+
+	usage: scrape_usage.py [-h] [--creds CREDS] [-f] [-g] [-o OUTPUT]
+
+	Fetch/parse AAISP usage data
+
+	optional arguments:
+	-h, --help            show this help message and exit
+	--creds CREDS         Location of the credentials with which to log into
+							clueless
+	-f, --fetch           Fetch latest data from clueless and store to disc
+							(requires creds)
+	-g, --graph           Generate HTML output
+	-o OUTPUT, --output OUTPUT
+							Location of HTML output
 
 
 TODO

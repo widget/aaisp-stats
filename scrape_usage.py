@@ -1,5 +1,10 @@
 #!/usr/bin/python3
 
+"""
+Fetching data from AAISP's human-readable usage stats, parsing it, and generating vector graph output.
+"""
+
+
 import argparse
 from bs4 import BeautifulSoup
 import calendar
@@ -155,10 +160,13 @@ def fetchData(creds):
 if __name__ == "__main__":
 	
 	parser = argparse.ArgumentParser(description="Fetch/parse AAISP usage data")
-	parser.add_argument("--creds")
-	parser.add_argument("-f", "--fetch", default=False, action="store_const", const=True)
-	parser.add_argument("-g", "--graph", default=False, action="store_const", const=True)
-	parser.add_argument("-o", "--output", default="./output.html")
+	parser.add_argument("--creds", help="Location of the credentials with which to log into clueless")
+	parser.add_argument("-f", "--fetch", default=False, action="store_const", const=True,
+					 help="Fetch latest data from clueless and store to disc (requires creds)")
+	parser.add_argument("-g", "--graph", default=False, action="store_const", const=True,
+					 help="Generate HTML output")
+	parser.add_argument("-o", "--output", default="./output.html",
+					 help="Location of HTML output")
 	
 	args = parser.parse_args()
 	
